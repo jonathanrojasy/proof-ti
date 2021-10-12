@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 let matriz;
 app.get('/', function(req, res) {
     respuesta = {
-     error: true,
+     error: false,
      codigo: 200,
      mensaje: 'Bienvenido'
     };
