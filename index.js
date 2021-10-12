@@ -21,7 +21,7 @@ app.route('/resolver')
     mensaje: 'Ingrese valores a la matriz'
    };
   } else {
-    matriz = req.body.matriz;
+    matriz = invertirMatriz(req.body.matriz);
     respuesta = {
      error: false,
      codigo: 200,
@@ -33,7 +33,9 @@ app.route('/resolver')
  })
 
  function invertirMatriz(texto){
-
+    let matriz_invertida;
+    matriz_invertida = texto;
+    return matriz_invertida;
  }
 
 app.use(function(req, res, next) {
