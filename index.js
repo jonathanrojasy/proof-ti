@@ -33,16 +33,59 @@ app.route('/resolver')
  })
 
  function invertirMatriz(texto){
-    let matriz_invertida;
-    matriz_invertida = texto;
+    //acotar
+    let texto_matriz_acotada = texto.substring(1,(texto.length - 1));
+    // crear variables de análisis
+    let arregloMatriz = [];
+    let arregloFila = [];
+    let auxValor = 0;
+    let dentroFila = false;
+    // guardar tamaño matriz
+    let tamMatrizCuadrada = 0;
     // convertir texto a matriz
-    let tamMatrizCuadrada = -1;
-    for(let i = 0; i < texto.length; i++) {
-        if (cadena[i].toLowerCase() === "[") tamMatrizCuadrada++;
+    for(let i = 0; i < texto_matriz_acotada.length; i++) {
+        if (texto_matriz_acotada[i] === "["){
+            // inicia el ingreso de una fila y un valor, se incrementa el tam de la matriz en 1
+            tamMatrizCuadrada++;
+            dentroFila = true;
+        }else if (texto_matriz_acotada[i] === "," ){
+            // termina el ingreso de un valor y sigue otro
+            if(dentroFila){
+               arregloFila.push(auxValor); 
+            }
+            auxValor = 0;
+        }else if (texto_matriz_acotada[i] === "]"){
+            // termina el ingreso de una fila
+            arregloFila.push(auxValor);
+            auxValor = 0;
+            arregloMatriz.push(arregloFila);
+            arregloFila = [];
+            dentroFila = false;
+        }else if(texto_matriz_acotada[i] >= "0" && texto_matriz_acotada[i] <= "9"){
+            // es un valor numérico
+            auxValor = auxValor * 10 + parseInt(texto_matriz_acotada[i]);
+        }else{
+            // omitir en caso no sea un número
+            continue;
+        }
     }
+        
     // invertir matriz
+    let matrizInvertida = [];
+    arregloFila = [];
 
-    return matriz_invertida;
+    for (let i = 1; i <= tamMatrizCuadrada; i++) {
+        let auxArray;
+        for (let j = 1; j <= tamMatrizCuadrada; j++) {
+            auxArray =  arregloMatriz[j-1];
+            arregloFila.push(auxArray[tamMatrizCuadrada-i]);
+        }
+        matrizInvertida.push(arregloFila);
+        arregloFila = [];
+    }
+    let textoMatrizInvertida = matrizInvertida.toString();
+
+    return matrizInvertida;
  }
 
 app.use(function(req, res, next) {
