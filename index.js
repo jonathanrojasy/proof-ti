@@ -4,6 +4,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let matriz;
+app.get('/', function(req, res) {
+    respuesta = {
+     error: true,
+     codigo: 200,
+     mensaje: 'Bienvenido'
+    };
+    res.send(respuesta);
+   });
 app.route('/resolver')
  .post(function (req, res) {
   if(!req.body.matriz) {
@@ -23,6 +31,10 @@ app.route('/resolver')
   }
   res.send(respuesta);
  })
+
+ function invertirMatriz(texto){
+
+ }
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "application/json");
