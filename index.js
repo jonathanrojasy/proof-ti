@@ -36,7 +36,10 @@ app.route('/resolver')
     let matriz_invertida;
     matriz_invertida = texto;
     // convertir texto a matriz
-
+    let tamMatrizCuadrada = -1;
+    for(let i = 0; i < texto.length; i++) {
+        if (cadena[i].toLowerCase() === "[") tamMatrizCuadrada++;
+    }
     // invertir matriz
 
     return matriz_invertida;
