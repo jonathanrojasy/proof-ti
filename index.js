@@ -35,6 +35,10 @@ app.route('/resolver')
  function invertirMatriz(texto){
     let matriz_invertida;
     matriz_invertida = texto;
+    // convertir texto a matriz
+
+    // invertir matriz
+
     return matriz_invertida;
  }
 
